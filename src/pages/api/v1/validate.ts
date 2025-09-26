@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { validateApiKey, trackUsage, checkRateLimit } from '../../../lib/api-auth';
 
 interface ValidationRequest {
   caption: string;
@@ -47,6 +48,53 @@ const SPAM_INDICATORS = [
 
 export const POST: APIRoute = async ({ request }) => {
   const startTime = Date.now();
+
+  // Check for API key in header
+  const apiKey = request.headers.get('Authorization') || request.headers.get('X-API-Key');
+
+  if (!apiKey) {
+    return new Response(JSON.stringify({
+      error: 'API key required',
+      code: 'MISSING_API_KEY',
+      message: 'Please provide an API key in the Authorization header'
+    }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  // Validate API key
+  const { valid, keyData, error } = await validateApiKey(apiKey);
+
+  if (!valid) {
+    return new Response(JSON.stringify({
+      error: error || 'Invalid API key',
+      code: 'INVALID_API_KEY'
+    }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  // Check rate limit
+  const rateLimit = await checkRateLimit(apiKey);
+
+  if (!rateLimit.allowed) {
+    return new Response(JSON.stringify({
+      error: 'Rate limit exceeded',
+      code: 'RATE_LIMIT_EXCEEDED',
+      limit: rateLimit.limit,
+      remaining: 0
+    }), {
+      status: 429,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Limit': String(rateLimit.limit || 10),
+        'X-RateLimit-Remaining': '0',
+        'Retry-After': '60'
+      }
+    });
+  }
 
   try {
     const body = await request.json() as ValidationRequest;
@@ -162,11 +210,24 @@ export const POST: APIRoute = async ({ request }) => {
       processingTime: Date.now() - startTime,
     };
 
+    // Track API usage
+    if (keyData) {
+      await trackUsage(
+        keyData.id,
+        '/api/v1/validate',
+        200,
+        response.processingTime,
+        request.headers.get('X-Forwarded-For') || request.headers.get('CF-Connecting-IP')
+      );
+    }
+
     return new Response(JSON.stringify(response), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
         'X-Processing-Time': `${response.processingTime}ms`,
+        'X-RateLimit-Limit': String(rateLimit.limit || 10),
+        'X-RateLimit-Remaining': String(rateLimit.remaining || 0),
       },
     });
 
