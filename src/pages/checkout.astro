@@ -1,0 +1,251 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Checkout - SafeCaption">
+  <div class="container mx-auto px-4 py-12 max-w-2xl">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-white mb-4">Complete Your Purchase</h1>
+      <p class="text-gray-400">Choose your plan and get started with SafeCaption</p>
+    </div>
+
+    <!-- Plan Selection -->
+    <div class="bg-gray-800 rounded-lg p-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <!-- Pro Plan -->
+        <div id="pro-plan" class="plan-card cursor-pointer border-2 border-gray-700 rounded-lg p-4 hover:border-purple-500 transition-colors">
+          <div class="flex items-center mb-3">
+            <input type="radio" name="plan" value="pro" class="mr-3">
+            <h3 class="text-lg font-semibold text-white">Pro Plan</h3>
+          </div>
+          <div class="text-2xl font-bold text-purple-400 mb-2" data-monthly="₹2,399/mo" data-yearly="₹24,999/yr">₹2,399/mo</div>
+          <p class="text-sm text-gray-400">10,000 API calls/month</p>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div id="enterprise-plan" class="plan-card cursor-pointer border-2 border-gray-700 rounded-lg p-4 hover:border-purple-500 transition-colors">
+          <div class="flex items-center mb-3">
+            <input type="radio" name="plan" value="enterprise" class="mr-3">
+            <h3 class="text-lg font-semibold text-white">Enterprise</h3>
+          </div>
+          <div class="text-2xl font-bold text-purple-400 mb-2" data-monthly="₹8,199/mo" data-yearly="₹81,999/yr">₹8,199/mo</div>
+          <p class="text-sm text-gray-400">100,000 API calls/month</p>
+        </div>
+      </div>
+
+      <!-- Billing Cycle -->
+      <div class="mb-6">
+        <h4 class="text-white font-medium mb-3">Billing Cycle</h4>
+        <div class="flex space-x-4">
+          <label class="flex items-center">
+            <input type="radio" name="billing" value="monthly" class="mr-2" checked>
+            <span class="text-gray-300">Monthly</span>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="billing" value="yearly" class="mr-2">
+            <span class="text-gray-300">Yearly</span>
+            <span class="ml-2 bg-green-600 text-white px-2 py-1 rounded text-xs">Save 17%</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="bg-gray-800 rounded-lg p-6 mb-8">
+      <h3 class="text-xl font-semibold text-white mb-4">Order Summary</h3>
+      <div class="space-y-3">
+        <div class="flex justify-between">
+          <span class="text-gray-300" id="plan-name">SafeCaption Pro Plan</span>
+          <span class="text-white" id="plan-price">₹2,399</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-300">Billing</span>
+          <span class="text-white" id="billing-display">Monthly</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-300">GST (18%)</span>
+          <span class="text-white" id="gst-amount">₹432</span>
+        </div>
+        <hr class="border-gray-700">
+        <div class="flex justify-between text-lg font-semibold">
+          <span class="text-white">Total</span>
+          <span class="text-purple-400" id="total-amount">₹2,831</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Button -->
+    <button
+      id="pay-now-btn"
+      class="w-full bg-purple-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Pay Now with Razorpay
+    </button>
+
+    <div class="text-center mt-6">
+      <p class="text-sm text-gray-400">
+        Secure payments powered by Razorpay • All major payment methods accepted
+      </p>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-gray-800 rounded-lg p-8 max-w-md mx-4 text-center">
+        <div class="mb-4">
+          <svg class="w-16 h-16 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4">Payment Successful! 🎉</h3>
+        <p class="text-gray-300 mb-6">Your subscription has been activated.</p>
+        <a href="/dashboard" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+          Go to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Razorpay Checkout Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    import { supabase } from '../lib/supabase';
+
+    // Update pricing based on selections
+    function updatePricing() {
+      const plan = document.querySelector('input[name="plan"]:checked')?.value || 'pro';
+      const billing = document.querySelector('input[name="billing"]:checked')?.value || 'monthly';
+
+      const planCard = document.getElementById(plan + '-plan');
+      const priceElement = planCard.querySelector('[data-monthly]');
+      const price = billing === 'yearly' ? priceElement.dataset.yearly : priceElement.dataset.monthly;
+
+      // Update summary
+      document.getElementById('plan-name').textContent = `SafeCaption ${plan === 'pro' ? 'Pro' : 'Enterprise'} Plan`;
+      document.getElementById('billing-display').textContent = billing === 'yearly' ? 'Yearly' : 'Monthly';
+
+      // Extract price number for GST calculation
+      const priceNumber = parseInt(price.replace(/[₹,]/g, ''));
+      const gstAmount = Math.round(priceNumber * 0.18);
+      const totalAmount = priceNumber + gstAmount;
+
+      document.getElementById('plan-price').textContent = `₹${priceNumber.toLocaleString('en-IN')}`;
+      document.getElementById('gst-amount').textContent = `₹${gstAmount.toLocaleString('en-IN')}`;
+      document.getElementById('total-amount').textContent = `₹${totalAmount.toLocaleString('en-IN')}`;
+
+      // Update plan card borders
+      document.querySelectorAll('.plan-card').forEach(card => {
+        card.classList.remove('border-purple-500');
+        card.classList.add('border-gray-700');
+      });
+      planCard.classList.remove('border-gray-700');
+      planCard.classList.add('border-purple-500');
+    }
+
+    // Event listeners for plan and billing changes
+    document.querySelectorAll('input[name="plan"], input[name="billing"]').forEach(input => {
+      input.addEventListener('change', updatePricing);
+    });
+
+    // Plan card click handlers
+    document.querySelectorAll('.plan-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const radio = card.querySelector('input[type="radio"]');
+        radio.checked = true;
+        updatePricing();
+      });
+    });
+
+    // Payment handler
+    document.getElementById('pay-now-btn').addEventListener('click', async () => {
+      const plan = document.querySelector('input[name="plan"]:checked')?.value;
+      const billing = document.querySelector('input[name="billing"]:checked')?.value;
+
+      if (!plan || !billing) {
+        alert('Please select a plan and billing cycle');
+        return;
+      }
+
+      // Check authentication
+      if (!supabase) {
+        alert('Please login to continue');
+        window.location.href = '/login';
+        return;
+      }
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        alert('Please login to continue');
+        window.location.href = '/login';
+        return;
+      }
+
+      try {
+        // Create order
+        const response = await fetch('/api/razorpay/create-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`
+          },
+          body: JSON.stringify({ plan, billing })
+        });
+
+        const order = await response.json();
+
+        if (!response.ok) {
+          throw new Error(order.error || 'Failed to create order');
+        }
+
+        // Initialize Razorpay checkout
+        const options = {
+          key: order.keyId,
+          amount: order.amount,
+          currency: order.currency,
+          name: 'SafeCaption',
+          description: order.description,
+          order_id: order.orderId,
+          handler: function(response) {
+            // Payment successful
+            console.log('Payment successful:', response);
+            document.getElementById('success-modal').classList.remove('hidden');
+          },
+          prefill: {
+            name: session.user.user_metadata?.full_name || '',
+            email: session.user.email,
+          },
+          theme: {
+            color: '#7c3aed'
+          },
+          modal: {
+            ondismiss: function() {
+              console.log('Payment modal closed');
+            }
+          }
+        };
+
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+
+      } catch (error) {
+        console.error('Payment error:', error);
+        alert('Payment failed. Please try again.');
+      }
+    });
+
+    // Handle URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const planFromUrl = urlParams.get('plan');
+    const billingFromUrl = urlParams.get('billing');
+
+    if (planFromUrl && ['pro', 'enterprise'].includes(planFromUrl)) {
+      document.querySelector(`input[name="plan"][value="${planFromUrl}"]`).checked = true;
+    }
+
+    if (billingFromUrl && ['monthly', 'yearly'].includes(billingFromUrl)) {
+      document.querySelector(`input[name="billing"][value="${billingFromUrl}"]`).checked = true;
+    }
+
+    // Initialize pricing
+    updatePricing();
+  </script>
+</Layout>
