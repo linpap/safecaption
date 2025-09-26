@@ -14,9 +14,49 @@
 
       <div class="flex items-center space-x-6">
         <a href="/" class="text-dark-textMuted hover:text-dark-text transition-colors">Home</a>
-        <a href="/about" class="text-dark-textMuted hover:text-dark-text transition-colors">About</a>
-        <button class="btn-primary">Get Started</button>
+        <a href="/demo" class="text-dark-textMuted hover:text-dark-text transition-colors">Demo</a>
+        <a href="/api" class="text-dark-textMuted hover:text-dark-text transition-colors">API</a>
+        <a href="/pricing" class="text-dark-textMuted hover:text-dark-text transition-colors">Pricing</a>
+        <div id="auth-links" class="flex items-center space-x-4">
+          <a href="/login" class="text-dark-textMuted hover:text-dark-text transition-colors">Login</a>
+          <a href="/signup" class="btn-primary">Sign Up</a>
+        </div>
+        <div id="user-menu" class="hidden flex items-center space-x-4">
+          <a href="/dashboard" class="text-dark-textMuted hover:text-dark-text transition-colors">Dashboard</a>
+          <button id="logout-btn" class="text-dark-textMuted hover:text-dark-text transition-colors">Logout</button>
+        </div>
       </div>
     </nav>
   </div>
 </header>
+
+<script>
+  import { supabase } from '../lib/supabase';
+
+  async function checkAuthStatus() {
+    if (!supabase) return;
+
+    const { data: { user } } = await supabase.auth.getUser();
+    const authLinks = document.getElementById('auth-links');
+    const userMenu = document.getElementById('user-menu');
+
+    if (user) {
+      authLinks?.classList.add('hidden');
+      userMenu?.classList.remove('hidden');
+    } else {
+      authLinks?.classList.remove('hidden');
+      userMenu?.classList.add('hidden');
+    }
+  }
+
+  // Logout handler
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    if (supabase) {
+      await supabase.auth.signOut();
+      window.location.href = '/';
+    }
+  });
+
+  // Check auth status on load
+  checkAuthStatus();
+</script>

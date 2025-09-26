@@ -1,0 +1,206 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Dashboard - SafeCaption">
+  <div class="container mx-auto px-4 py-8">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-white mb-2">Dashboard</h1>
+        <p class="text-gray-400">Manage your API keys and monitor usage</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-400 text-sm">API Calls Today</p>
+              <p class="text-2xl font-bold text-white" id="calls-today">0</p>
+            </div>
+            <svg class="w-12 h-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-400 text-sm">Monthly Limit</p>
+              <p class="text-2xl font-bold text-white" id="monthly-limit">100</p>
+            </div>
+            <svg class="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-400 text-sm">Current Plan</p>
+              <p class="text-2xl font-bold text-white" id="current-plan">Free</p>
+            </div>
+            <svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- API Keys Section -->
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 mb-8">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-semibold text-white">API Keys</h2>
+          <button id="create-key-btn" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">
+            Generate New Key
+          </button>
+        </div>
+
+        <div id="api-keys-list" class="space-y-4">
+          <!-- API keys will be loaded here -->
+          <div class="text-gray-400 text-center py-4">
+            No API keys yet. Create your first key to get started.
+          </div>
+        </div>
+      </div>
+
+      <!-- Usage History -->
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-white mb-6">Recent Usage</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left text-gray-400">
+            <thead class="text-xs uppercase bg-gray-900">
+              <tr>
+                <th class="px-6 py-3">Time</th>
+                <th class="px-6 py-3">Endpoint</th>
+                <th class="px-6 py-3">Status</th>
+                <th class="px-6 py-3">Response Time</th>
+              </tr>
+            </thead>
+            <tbody id="usage-history">
+              <tr>
+                <td colspan="4" class="px-6 py-4 text-center">No usage data yet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Upgrade CTA -->
+      <div class="mt-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg p-6">
+        <div class="flex justify-between items-center">
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-2">Need more API calls?</h3>
+            <p class="text-white/80">Upgrade to Pro for 10,000 calls/month and premium features</p>
+          </div>
+          <a href="/pricing" class="bg-white text-purple-600 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition">
+            Upgrade Plan
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create API Key Modal -->
+  <div id="create-key-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
+      <h3 class="text-xl font-semibold text-white mb-4">Create New API Key</h3>
+      <form id="create-key-form">
+        <input
+          type="text"
+          name="key-name"
+          placeholder="Key name (e.g., Production App)"
+          required
+          class="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-purple-500 focus:outline-none"
+        />
+        <div class="mt-4 flex justify-end space-x-3">
+          <button type="button" id="cancel-key-btn" class="px-4 py-2 text-gray-400 hover:text-white transition">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">
+            Create Key
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    import { supabase } from '../lib/supabase';
+
+    // Check authentication
+    async function checkAuth() {
+      if (!supabase) {
+        window.location.href = '/login';
+        return;
+      }
+
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        window.location.href = '/login';
+      } else {
+        loadDashboardData(user.id);
+      }
+    }
+
+    // Load dashboard data
+    async function loadDashboardData(userId: string) {
+      // This would normally fetch from Supabase
+      // For now, showing placeholder data
+      document.getElementById('calls-today')!.textContent = '42';
+      document.getElementById('monthly-limit')!.textContent = '100';
+      document.getElementById('current-plan')!.textContent = 'Free';
+    }
+
+    // Modal handling
+    const createKeyBtn = document.getElementById('create-key-btn');
+    const modal = document.getElementById('create-key-modal');
+    const cancelBtn = document.getElementById('cancel-key-btn');
+    const createKeyForm = document.getElementById('create-key-form');
+
+    createKeyBtn?.addEventListener('click', () => {
+      modal?.classList.remove('hidden');
+    });
+
+    cancelBtn?.addEventListener('click', () => {
+      modal?.classList.add('hidden');
+    });
+
+    createKeyForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Generate API key logic here
+      const keyName = (e.target as HTMLFormElement).querySelector('[name="key-name"]')?.value;
+
+      // Generate a random API key
+      const apiKey = 'sk_' + Array.from(crypto.getRandomValues(new Uint8Array(32)))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+
+      // Display the key (in production, save to Supabase)
+      const keysList = document.getElementById('api-keys-list');
+      if (keysList) {
+        keysList.innerHTML = `
+          <div class="p-4 bg-gray-700 rounded">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-white">${keyName}</p>
+                <p class="text-sm text-gray-400 font-mono">${apiKey}</p>
+              </div>
+              <button class="text-red-400 hover:text-red-300">Delete</button>
+            </div>
+          </div>
+        `;
+      }
+
+      modal?.classList.add('hidden');
+      (e.target as HTMLFormElement).reset();
+    });
+
+    // Check auth on page load
+    checkAuth();
+  </script>
+</Layout>
