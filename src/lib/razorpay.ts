@@ -1,14 +1,41 @@
-import Razorpay from 'razorpay';
-
-// Initialize Razorpay
+// Server-side Razorpay integration for Astro
 const razorpayKey = import.meta.env.RAZORPAY_KEY_ID;
 const razorpaySecret = import.meta.env.RAZORPAY_KEY_SECRET;
 
+// Simple Razorpay API implementation without the full SDK
+class SimpleRazorpay {
+  private keyId: string;
+  private keySecret: string;
+
+  constructor(keyId: string, keySecret: string) {
+    this.keyId = keyId;
+    this.keySecret = keySecret;
+  }
+
+  async createOrder(options: { amount: number; currency: string; notes?: any }) {
+    const response = await fetch('https://api.razorpay.com/v1/orders', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${btoa(`${this.keyId}:${this.keySecret}`)}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        amount: options.amount,
+        currency: options.currency,
+        notes: options.notes || {},
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Razorpay API error: ${response.statusText}`);
+    }
+
+    return await response.json();
+  }
+}
+
 export const razorpay = razorpayKey && razorpaySecret
-  ? new Razorpay({
-      key_id: razorpayKey,
-      key_secret: razorpaySecret,
-    })
+  ? new SimpleRazorpay(razorpayKey, razorpaySecret)
   : null;
 
 // Pricing configuration in INR (paise - multiply by 100)
@@ -99,7 +126,7 @@ export async function createOrder(amount: number, userId: string) {
     throw new Error('Razorpay is not configured');
   }
 
-  const order = await razorpay.orders.create({
+  const order = await razorpay.createOrder({
     amount: amount, // Amount in paise
     currency: 'INR',
     notes: {

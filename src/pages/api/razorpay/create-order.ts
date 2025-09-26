@@ -2,9 +2,22 @@ import type { APIRoute } from 'astro';
 import { createOrder } from '../../../lib/razorpay';
 import { supabase } from '../../../lib/supabase';
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { plan, billing } = await request.json();
+    // Check if request has body
+    const body = await request.text();
+    if (!body) {
+      return new Response(JSON.stringify({
+        error: 'Request body is empty'
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const { plan, billing } = JSON.parse(body);
 
     // Get user session from Authorization header
     const authHeader = request.headers.get('Authorization');
@@ -62,6 +75,8 @@ export const POST: APIRoute = async ({ request }) => {
     const order = await createOrder(amount, user.id);
 
     // Store order details in database for later verification
+    // TODO: Add this back after running payment_orders.sql in Supabase
+    /*
     await supabase
       .from('payment_orders')
       .insert({
@@ -72,6 +87,7 @@ export const POST: APIRoute = async ({ request }) => {
         amount: amount,
         status: 'created',
       });
+    */
 
     return new Response(JSON.stringify({
       orderId: order.id,
