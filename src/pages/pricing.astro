@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="SafeCaption - Pricing">
+  <div class="min-h-screen bg-black text-white">
+    <div class="container mx-auto px-6 py-12">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h1>
+          <p class="text-xl text-gray-400">Choose the plan that fits your needs</p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+          <!-- Free Plan -->
+          <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-gray-700 transition-colors">
+            <div class="mb-6">
+              <h3 class="text-2xl font-bold mb-2">Free</h3>
+              <div class="text-4xl font-bold mb-4">
+                $0
+                <span class="text-lg font-normal text-gray-400">/month</span>
+              </div>
+              <p class="text-gray-400">Perfect for individuals getting started</p>
+            </div>
+
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>1,000 validations/month</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Basic content validation</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Hashtag suggestions</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>API access</span>
+              </li>
+              <li class="flex items-start text-gray-500">
+                <svg class="w-5 h-5 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Advanced analytics</span>
+              </li>
+              <li class="flex items-start text-gray-500">
+                <svg class="w-5 h-5 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Priority support</span>
+              </li>
+            </ul>
+
+            <button class="w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-colors">
+              Get Started
+            </button>
+          </div>
+
+          <!-- Pro Plan -->
+          <div class="bg-gradient-to-b from-purple-900/20 to-gray-900 rounded-xl p-8 border-2 border-purple-500/50 relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm font-medium">
+              Most Popular
+            </div>
+            <div class="mb-6">
+              <h3 class="text-2xl font-bold mb-2">Pro</h3>
+              <div class="text-4xl font-bold mb-4">
+                $9
+                <span class="text-lg font-normal text-gray-400">/month</span>
+              </div>
+              <p class="text-gray-400">For growing creators and agencies</p>
+            </div>
+
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="font-medium">50,000 validations/month</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Advanced AI analysis</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Engagement predictions</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Batch processing</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Analytics dashboard</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Email support</span>
+              </li>
+            </ul>
+
+            <button class="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90 rounded-lg font-medium transition-opacity">
+              Start Pro Trial
+            </button>
+          </div>
+
+          <!-- Enterprise Plan -->
+          <div class="bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-gray-700 transition-colors">
+            <div class="mb-6">
+              <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+              <div class="text-4xl font-bold mb-4">
+                Custom
+              </div>
+              <p class="text-gray-400">For large teams and businesses</p>
+            </div>
+
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Unlimited validations</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Custom AI models</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Dedicated infrastructure</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>SLA guarantee</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>White-label options</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>24/7 priority support</span>
+              </li>
+            </ul>
+
+            <button class="w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 rounded-lg font-medium transition-colors">
+              Contact Sales
+            </button>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+
+          <div class="space-y-6">
+            <details class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <summary class="cursor-pointer font-semibold text-lg">How does SafeCaption work?</summary>
+              <p class="mt-4 text-gray-400">
+                SafeCaption uses advanced AI models to analyze your Instagram captions for potential policy violations,
+                spam indicators, and engagement optimization. Simply send your caption through our API and receive
+                instant feedback on safety, compliance, and suggestions for improvement.
+              </p>
+            </details>
+
+            <details class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <summary class="cursor-pointer font-semibold text-lg">Can I upgrade or downgrade my plan?</summary>
+              <p class="mt-4 text-gray-400">
+                Yes! You can change your plan at any time. When upgrading, you'll be charged the prorated amount for
+                the remainder of the billing cycle. When downgrading, the change will take effect at the next billing cycle.
+              </p>
+            </details>
+
+            <details class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <summary class="cursor-pointer font-semibold text-lg">Is my content data stored?</summary>
+              <p class="mt-4 text-gray-400">
+                No, we prioritize privacy. Your content is processed in real-time and is never stored on our servers.
+                We only maintain anonymous usage metrics to improve our service quality.
+              </p>
+            </details>
+
+            <details class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <summary class="cursor-pointer font-semibold text-lg">What happens if I exceed my monthly limit?</summary>
+              <p class="mt-4 text-gray-400">
+                You'll receive notifications as you approach your limit. Once exceeded, you can either upgrade your plan
+                or wait for the next billing cycle. Enterprise customers have unlimited usage with no restrictions.
+              </p>
+            </details>
+
+            <details class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <summary class="cursor-pointer font-semibold text-lg">Do you offer refunds?</summary>
+              <p class="mt-4 text-gray-400">
+                We offer a 14-day money-back guarantee for all paid plans. If you're not satisfied with SafeCaption,
+                contact our support team within 14 days of your purchase for a full refund.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="text-center mt-16 py-12 border-t border-gray-800">
+          <h3 class="text-2xl font-bold mb-4">Need a custom solution?</h3>
+          <p class="text-gray-400 mb-6">
+            Let's discuss how SafeCaption can meet your specific requirements.
+          </p>
+          <a href="mailto:enterprise@safecaption.com" class="btn-primary px-8 py-3 inline-block">
+            Contact Sales Team
+          </a>
+        </section>
+      </div>
+    </div>
+  </div>
+</Layout>

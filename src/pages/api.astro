@@ -1,0 +1,385 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="SafeCaption - API Documentation">
+  <div class="min-h-screen bg-black text-white">
+    <div class="container mx-auto px-6 py-12">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="text-4xl font-bold mb-4">API Documentation</h1>
+        <p class="text-gray-400 mb-12">Everything you need to integrate SafeCaption into your application</p>
+
+        <!-- Quick Start -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6 text-purple-400">Quick Start</h2>
+          <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+            <p class="mb-4">Get your API key from the dashboard and make your first request:</p>
+            <pre class="bg-black p-4 rounded overflow-x-auto"><code class="text-sm">{`curl -X POST https://api.safecaption.com/v1/validate \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{"caption": "Check out my new post!"}'`}</code></pre>
+          </div>
+        </section>
+
+        <!-- Authentication -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6 text-purple-400">Authentication</h2>
+          <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+            <p class="mb-4">SafeCaption uses API keys to authenticate requests. Include your API key in the Authorization header:</p>
+            <pre class="bg-black p-4 rounded"><code class="text-sm">Authorization: Bearer YOUR_API_KEY</code></pre>
+            <div class="mt-4 p-4 bg-yellow-900/20 border border-yellow-500/50 rounded">
+              <p class="text-yellow-200 text-sm">
+                <strong>Security:</strong> Keep your API keys secure and never expose them in client-side code.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Endpoints -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6 text-purple-400">Endpoints</h2>
+
+          <!-- Validate Endpoint -->
+          <div class="bg-gray-900 rounded-lg p-6 border border-gray-800 mb-6">
+            <div class="flex items-center mb-4">
+              <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded text-sm font-mono mr-3">POST</span>
+              <code class="text-lg">/api/v1/validate</code>
+            </div>
+
+            <p class="text-gray-400 mb-6">Validates an Instagram caption for safety, compliance, and engagement optimization.</p>
+
+            <h3 class="font-semibold mb-3">Request Body</h3>
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-800">
+                    <th class="text-left py-2 pr-4">Parameter</th>
+                    <th class="text-left py-2 pr-4">Type</th>
+                    <th class="text-left py-2 pr-4">Required</th>
+                    <th class="text-left py-2">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">caption</td>
+                    <td class="py-3 pr-4 text-gray-400">string</td>
+                    <td class="py-3 pr-4 text-green-400">Yes</td>
+                    <td class="py-3 text-gray-400">The Instagram caption to validate (max 2200 chars)</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">hashtags</td>
+                    <td class="py-3 pr-4 text-gray-400">array</td>
+                    <td class="py-3 pr-4 text-gray-500">No</td>
+                    <td class="py-3 text-gray-400">Array of hashtags to analyze</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">options</td>
+                    <td class="py-3 pr-4 text-gray-400">object</td>
+                    <td class="py-3 pr-4 text-gray-500">No</td>
+                    <td class="py-3 text-gray-400">Validation options (see below)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="font-semibold mb-3">Options Object</h3>
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-800">
+                    <th class="text-left py-2 pr-4">Option</th>
+                    <th class="text-left py-2 pr-4">Type</th>
+                    <th class="text-left py-2 pr-4">Default</th>
+                    <th class="text-left py-2">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">checkHateSpeech</td>
+                    <td class="py-3 pr-4 text-gray-400">boolean</td>
+                    <td class="py-3 pr-4 text-gray-400">true</td>
+                    <td class="py-3 text-gray-400">Check for hate speech and offensive content</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">checkSpam</td>
+                    <td class="py-3 pr-4 text-gray-400">boolean</td>
+                    <td class="py-3 pr-4 text-gray-400">true</td>
+                    <td class="py-3 text-gray-400">Check for spam indicators</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">checkCompliance</td>
+                    <td class="py-3 pr-4 text-gray-400">boolean</td>
+                    <td class="py-3 pr-4 text-gray-400">true</td>
+                    <td class="py-3 text-gray-400">Check for policy compliance</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">optimizeHashtags</td>
+                    <td class="py-3 pr-4 text-gray-400">boolean</td>
+                    <td class="py-3 pr-4 text-gray-400">false</td>
+                    <td class="py-3 text-gray-400">Generate optimized hashtag suggestions</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">predictEngagement</td>
+                    <td class="py-3 pr-4 text-gray-400">boolean</td>
+                    <td class="py-3 pr-4 text-gray-400">false</td>
+                    <td class="py-3 text-gray-400">Predict engagement metrics</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="font-semibold mb-3">Example Request</h3>
+            <pre class="bg-black p-4 rounded overflow-x-auto mb-6"><code class="text-sm language-json">{`{
+  "caption": "Just launched my new collection! 🎉 What do you think?",
+  "hashtags": ["#fashion", "#newcollection", "#style"],
+  "options": {
+    "checkSpam": true,
+    "optimizeHashtags": true,
+    "predictEngagement": true
+  }
+}`}</code></pre>
+
+            <h3 class="font-semibold mb-3">Response</h3>
+            <pre class="bg-black p-4 rounded overflow-x-auto mb-6"><code class="text-sm language-json">{`{
+  "safe": true,
+  "score": 92,
+  "issues": [],
+  "suggestions": {
+    "hashtags": [
+      "#fashion", "#newcollection", "#style",
+      "#fashionista", "#ootd", "#trending"
+    ]
+  },
+  "metrics": {
+    "engagementScore": 78,
+    "readabilityScore": 85,
+    "hashtagRelevance": 90
+  },
+  "processingTime": 8
+}`}</code></pre>
+          </div>
+        </section>
+
+        <!-- Rate Limits -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6 text-purple-400">Rate Limits</h2>
+          <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-800">
+                    <th class="text-left py-2 pr-4">Plan</th>
+                    <th class="text-left py-2 pr-4">Requests/Month</th>
+                    <th class="text-left py-2">Requests/Second</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4">Free</td>
+                    <td class="py-3 pr-4">1,000</td>
+                    <td class="py-3">1</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4">Pro</td>
+                    <td class="py-3 pr-4">50,000</td>
+                    <td class="py-3">10</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4">Enterprise</td>
+                    <td class="py-3 pr-4">Unlimited</td>
+                    <td class="py-3">Custom</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-gray-400 mt-4">
+              Rate limit information is included in response headers: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>
+            </p>
+          </div>
+        </section>
+
+        <!-- Error Codes -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6 text-purple-400">Error Codes</h2>
+          <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-800">
+                    <th class="text-left py-2 pr-4">Code</th>
+                    <th class="text-left py-2 pr-4">Description</th>
+                    <th class="text-left py-2">Solution</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">400</td>
+                    <td class="py-3 pr-4">Bad Request</td>
+                    <td class="py-3 text-gray-400">Check request format and required parameters</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">401</td>
+                    <td class="py-3 pr-4">Unauthorized</td>
+                    <td class="py-3 text-gray-400">Verify your API key is valid</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">429</td>
+                    <td class="py-3 pr-4">Too Many Requests</td>
+                    <td class="py-3 text-gray-400">You've exceeded rate limits, wait before retrying</td>
+                  </tr>
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-3 pr-4 font-mono">500</td>
+                    <td class="py-3 pr-4">Internal Server Error</td>
+                    <td class="py-3 text-gray-400">Contact support if this persists</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SDKs -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6 text-purple-400">SDKs & Libraries</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <h3 class="font-semibold mb-3 flex items-center">
+                <span class="mr-2">🟨</span> JavaScript/Node.js
+              </h3>
+              <pre class="bg-black p-3 rounded text-sm mb-3"><code>npm install @safecaption/js</code></pre>
+              <a href="#" class="text-purple-400 hover:text-purple-300 text-sm">View on GitHub →</a>
+            </div>
+
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <h3 class="font-semibold mb-3 flex items-center">
+                <span class="mr-2">🐍</span> Python
+              </h3>
+              <pre class="bg-black p-3 rounded text-sm mb-3"><code>pip install safecaption</code></pre>
+              <a href="#" class="text-purple-400 hover:text-purple-300 text-sm">View on GitHub →</a>
+            </div>
+
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <h3 class="font-semibold mb-3 flex items-center">
+                <span class="mr-2">💎</span> Ruby
+              </h3>
+              <pre class="bg-black p-3 rounded text-sm mb-3"><code>gem install safecaption</code></pre>
+              <a href="#" class="text-purple-400 hover:text-purple-300 text-sm">View on GitHub →</a>
+            </div>
+
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <h3 class="font-semibold mb-3 flex items-center">
+                <span class="mr-2">🟦</span> PHP
+              </h3>
+              <pre class="bg-black p-3 rounded text-sm mb-3"><code>composer require safecaption/php</code></pre>
+              <a href="#" class="text-purple-400 hover:text-purple-300 text-sm">View on GitHub →</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Code Examples -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6 text-purple-400">Code Examples</h2>
+
+          <div class="space-y-6">
+            <!-- JavaScript Example -->
+            <details class="bg-gray-900 rounded-lg border border-gray-800">
+              <summary class="p-6 cursor-pointer font-semibold">JavaScript Example</summary>
+              <div class="px-6 pb-6">
+                <pre class="bg-black p-4 rounded overflow-x-auto"><code class="text-sm language-javascript">{`import SafeCaption from '@safecaption/js';
+
+const client = new SafeCaption('YOUR_API_KEY');
+
+async function validateCaption() {
+  try {
+    const result = await client.validate({
+      caption: 'Check out my new post!',
+      hashtags: ['#fashion', '#style'],
+      options: {
+        optimizeHashtags: true,
+        predictEngagement: true
+      }
+    });
+
+    console.log('Safety Score:', result.score);
+    console.log('Is Safe:', result.safe);
+
+    if (result.suggestions.hashtags) {
+      console.log('Optimized Hashtags:', result.suggestions.hashtags);
+    }
+  } catch (error) {
+    console.error('Validation failed:', error);
+  }
+}
+
+validateCaption();`}</code></pre>
+              </div>
+            </details>
+
+            <!-- Python Example -->
+            <details class="bg-gray-900 rounded-lg border border-gray-800">
+              <summary class="p-6 cursor-pointer font-semibold">Python Example</summary>
+              <div class="px-6 pb-6">
+                <pre class="bg-black p-4 rounded overflow-x-auto"><code class="text-sm language-python">{`from safecaption import SafeCaption
+
+client = SafeCaption(api_key='YOUR_API_KEY')
+
+try:
+    result = client.validate(
+        caption='Check out my new post!',
+        hashtags=['#fashion', '#style'],
+        options={
+            'optimize_hashtags': True,
+            'predict_engagement': True
+        }
+    )
+
+    print(f"Safety Score: {result['score']}")
+    print(f"Is Safe: {result['safe']}")
+
+    if 'hashtags' in result['suggestions']:
+        print(f"Optimized Hashtags: {result['suggestions']['hashtags']}")
+
+except Exception as e:
+    print(f"Validation failed: {e}")`}</code></pre>
+              </div>
+            </details>
+
+            <!-- cURL Example -->
+            <details class="bg-gray-900 rounded-lg border border-gray-800">
+              <summary class="p-6 cursor-pointer font-semibold">cURL Example</summary>
+              <div class="px-6 pb-6">
+                <pre class="bg-black p-4 rounded overflow-x-auto"><code class="text-sm language-bash">{`curl -X POST https://api.safecaption.com/v1/validate \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "caption": "Check out my new post!",
+    "hashtags": ["#fashion", "#style"],
+    "options": {
+      "optimizeHashtags": true,
+      "predictEngagement": true
+    }
+  }'`}</code></pre>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- Support -->
+        <section class="text-center py-12 border-t border-gray-800">
+          <h3 class="text-2xl font-bold mb-4">Need Help?</h3>
+          <p class="text-gray-400 mb-6">
+            Our team is here to help you integrate SafeCaption successfully.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="mailto:support@safecaption.com" class="btn-primary px-6 py-3 inline-block">
+              Contact Support
+            </a>
+            <a href="https://github.com/safecaption/docs" class="btn-secondary px-6 py-3 inline-block">
+              GitHub Docs
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</Layout>

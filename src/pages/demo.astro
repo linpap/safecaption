@@ -1,0 +1,422 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="SafeCaption - Live Demo">
+  <div class="min-h-screen bg-black text-white">
+    <div class="container mx-auto px-6 py-8">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+            🛡️ SafeCaption Playground
+          </h1>
+          <p class="text-xl text-gray-400 mb-6">Test your Instagram captions in real-time</p>
+          <div class="flex justify-center gap-4 text-sm">
+            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full">
+              ✓ Instant validation
+            </span>
+            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full">
+              ⚡ &lt;5ms response
+            </span>
+            <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full">
+              🔒 Privacy first
+            </span>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+          <!-- Input Section -->
+          <div class="lg:col-span-1 space-y-6">
+            <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+              <h2 class="text-lg font-semibold mb-4 text-purple-400">📝 Caption Input</h2>
+            <div>
+              <label class="block text-sm font-medium mb-2">Instagram Caption</label>
+              <textarea
+                id="caption-input"
+                placeholder="Enter your Instagram caption here..."
+                class="w-full h-32 px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:border-purple-500 focus:outline-none transition-colors resize-none"
+              ></textarea>
+              <div class="text-xs text-gray-500 mt-1">
+                <span id="char-count">0</span> / 2200 characters
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Hashtags (optional)</label>
+              <input
+                id="hashtags-input"
+                type="text"
+                placeholder="#fashion #style #ootd"
+                class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
+              />
+              <div class="text-xs text-gray-500 mt-1">Separate with spaces</div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-3">Validation Options</label>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" id="check-hate" checked class="mr-2 accent-purple-500">
+                  <span class="text-sm">Check for hate speech</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" id="check-spam" checked class="mr-2 accent-purple-500">
+                  <span class="text-sm">Check for spam</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" id="check-compliance" checked class="mr-2 accent-purple-500">
+                  <span class="text-sm">Check compliance</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" id="optimize-hashtags" checked class="mr-2 accent-purple-500">
+                  <span class="text-sm">Optimize hashtags</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" id="predict-engagement" checked class="mr-2 accent-purple-500">
+                  <span class="text-sm">Predict engagement</span>
+                </label>
+              </div>
+            </div>
+
+              <button
+                id="validate-btn"
+                class="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-medium hover:opacity-90 transition-opacity"
+              >
+                🔍 Validate Caption
+              </button>
+            </div>
+
+            <!-- Quick Examples -->
+            <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+              <h3 class="text-lg font-semibold mb-4 text-gray-300">📁 Quick Examples</h3>
+              <div class="space-y-3">
+                <button class="example-btn w-full text-left text-sm p-3 bg-gray-800/50 hover:bg-gray-700/50 rounded-lg border border-gray-700 transition-colors"
+                  data-caption="Just launched my new collection! 🔥 What do you think? Let me know in the comments! #fashion #style #newdrop">
+                  <div class="flex items-start">
+                    <span class="text-green-400 mr-2 mt-0.5">✓</span>
+                    <div>
+                      <div class="font-medium text-green-300">Good Example</div>
+                      <div class="text-gray-400 text-xs">Engaging product announcement</div>
+                    </div>
+                  </div>
+                </button>
+
+                <button class="example-btn w-full text-left text-sm p-3 bg-gray-800/50 hover:bg-gray-700/50 rounded-lg border border-gray-700 transition-colors"
+                  data-caption="FOLLOW ME AND I'LL FOLLOW BACK!!! DM FOR COLLABS!!! CLICK LINK IN BIO!!! 💰💰💰 FREE FOLLOWERS!!!">
+                  <div class="flex items-start">
+                    <span class="text-yellow-400 mr-2 mt-0.5">⚠</span>
+                    <div>
+                      <div class="font-medium text-yellow-300">Spam Example</div>
+                      <div class="text-gray-400 text-xs">Aggressive follow-for-follow</div>
+                    </div>
+                  </div>
+                </button>
+
+                <button class="example-btn w-full text-left text-sm p-3 bg-gray-800/50 hover:bg-gray-700/50 rounded-lg border border-gray-700 transition-colors"
+                  data-caption="This miracle product will cure ALL your problems instantly! Guaranteed results in 24 hours! Medical professionals HATE this trick!">
+                  <div class="flex items-start">
+                    <span class="text-red-400 mr-2 mt-0.5">✖</span>
+                    <div>
+                      <div class="font-medium text-red-300">Violation Example</div>
+                      <div class="text-gray-400 text-xs">False medical claims</div>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Section -->
+          <div class="lg:col-span-2 space-y-6">
+            <!-- Default State -->
+            <div id="default-state" class="text-center py-12 bg-gray-900/30 rounded-xl border border-gray-800 border-dashed">
+              <div class="text-4xl mb-4">🔍</div>
+              <h3 class="text-xl font-semibold mb-2 text-gray-300">Ready to validate</h3>
+              <p class="text-gray-500">Enter a caption and click "Validate Caption" to see results</p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-container" class="hidden text-center py-12 bg-gray-900/50 rounded-xl border border-gray-800">
+              <div class="inline-flex items-center">
+                <svg class="animate-spin h-6 w-6 mr-3 text-purple-400" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="text-lg">Analyzing caption...</span>
+              </div>
+            </div>
+
+            <div id="results-container" class="hidden space-y-6">
+              <!-- Safety Score -->
+              <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+                <div class="flex items-center mb-4">
+                  <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-semibold text-purple-400">🛡️ Safety Analysis</h3>
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-gray-400">Safety Score</span>
+                  <div class="flex items-center">
+                    <span id="safety-score" class="text-2xl font-bold mr-2">--</span>
+                    <span class="text-gray-400">/ 100</span>
+                  </div>
+                </div>
+
+                <div class="w-full bg-gray-800 rounded-full h-3 mb-4">
+                  <div id="score-bar" class="h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+
+                <div id="status-badge" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium">
+                  <span id="status-text">--</span>
+                </div>
+
+                <div id="issues-list" class="mt-4 hidden">
+                  <h4 class="text-sm font-medium mb-2 text-red-400">Issues Found:</h4>
+                  <ul id="issues" class="text-sm text-gray-400 space-y-1"></ul>
+                </div>
+              </div>
+
+              <!-- Metrics -->
+              <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+                <div class="flex items-center mb-4">
+                  <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-semibold text-blue-400">📈 Performance Metrics</h3>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="flex justify-between">
+                    <span class="text-gray-400 text-sm">Engagement Score</span>
+                    <span id="engagement-score" class="font-medium">--</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-400 text-sm">Readability</span>
+                    <span id="readability-score" class="font-medium">--</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-400 text-sm">Hashtag Relevance</span>
+                    <span id="hashtag-relevance" class="font-medium">--</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-400 text-sm">Processing Time</span>
+                    <span id="processing-time" class="font-medium">--</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Suggestions -->
+              <div id="suggestions-container" class="bg-gray-900/50 rounded-xl p-6 border border-gray-800 hidden">
+                <div class="flex items-center mb-4">
+                  <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-semibold text-green-400">💡 AI Suggestions</h3>
+                </div>
+
+                <div id="caption-suggestion" class="hidden mb-6">
+                  <h4 class="text-sm font-medium mb-3 text-green-300 flex items-center">
+                    <span class="mr-2">✏️</span> Improved Caption
+                  </h4>
+                  <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                    <p id="suggested-caption" class="text-gray-300 whitespace-pre-wrap"></p>
+                    <button onclick="copyToClipboard(document.getElementById('suggested-caption').textContent)"
+                      class="mt-3 text-xs text-gray-400 hover:text-white transition-colors">
+                      📋 Click to copy
+                    </button>
+                  </div>
+                </div>
+
+                <div id="hashtag-suggestion" class="hidden">
+                  <h4 class="text-sm font-medium mb-3 text-blue-300 flex items-center">
+                    <span class="mr-2">#️⃣</span> Optimized Hashtags
+                  </h4>
+                  <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                    <p id="suggested-hashtags" class="text-blue-300 text-sm leading-relaxed"></p>
+                    <button onclick="copyToClipboard(document.getElementById('suggested-hashtags').textContent)"
+                      class="mt-3 text-xs text-gray-400 hover:text-white transition-colors">
+                      📋 Click to copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const captionInput = document.getElementById('caption-input') as HTMLTextAreaElement;
+    const hashtagsInput = document.getElementById('hashtags-input') as HTMLInputElement;
+    const validateBtn = document.getElementById('validate-btn') as HTMLButtonElement;
+    const charCount = document.getElementById('char-count') as HTMLSpanElement;
+    const resultsContainer = document.getElementById('results-container') as HTMLDivElement;
+    const loadingContainer = document.getElementById('loading-container') as HTMLDivElement;
+
+    // Update character count
+    captionInput.addEventListener('input', () => {
+      charCount.textContent = captionInput.value.length.toString();
+      if (captionInput.value.length > 2200) {
+        charCount.classList.add('text-red-500');
+      } else {
+        charCount.classList.remove('text-red-500');
+      }
+    });
+
+    // Example buttons
+    document.querySelectorAll('.example-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = e.target as HTMLButtonElement;
+        captionInput.value = target.dataset.caption || '';
+        charCount.textContent = captionInput.value.length.toString();
+      });
+    });
+
+    // Validate caption
+    validateBtn.addEventListener('click', async () => {
+      const caption = captionInput.value.trim();
+
+      if (!caption) {
+        alert('Please enter a caption to validate');
+        return;
+      }
+
+      // Get options
+      const options = {
+        checkHateSpeech: (document.getElementById('check-hate') as HTMLInputElement).checked,
+        checkSpam: (document.getElementById('check-spam') as HTMLInputElement).checked,
+        checkCompliance: (document.getElementById('check-compliance') as HTMLInputElement).checked,
+        optimizeHashtags: (document.getElementById('optimize-hashtags') as HTMLInputElement).checked,
+        predictEngagement: (document.getElementById('predict-engagement') as HTMLInputElement).checked,
+      };
+
+      // Parse hashtags
+      const hashtags = hashtagsInput.value
+        .split(/\s+/)
+        .filter(h => h.length > 0)
+        .map(h => h.startsWith('#') ? h : `#${h}`);
+
+      // Show loading state
+      document.getElementById('default-state')?.classList.add('hidden');
+      resultsContainer.classList.add('hidden');
+      loadingContainer.classList.remove('hidden');
+
+      try {
+        const response = await fetch('/api/v1/validate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            caption,
+            hashtags,
+            options,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Validation failed');
+        }
+
+        // Display results
+        displayResults(data);
+      } catch (error) {
+        console.error('Validation error:', error);
+        alert('Failed to validate caption. Please try again.');
+      } finally {
+        loadingContainer.classList.add('hidden');
+      }
+    });
+
+    function displayResults(data: any) {
+      // Hide loading and default states, show results
+      document.getElementById('default-state')?.classList.add('hidden');
+      loadingContainer.classList.add('hidden');
+      resultsContainer.classList.remove('hidden');
+
+      // Safety score
+      const safetyScore = document.getElementById('safety-score') as HTMLSpanElement;
+      const scoreBar = document.getElementById('score-bar') as HTMLDivElement;
+      const statusBadge = document.getElementById('status-badge') as HTMLDivElement;
+      const statusText = document.getElementById('status-text') as HTMLSpanElement;
+
+      safetyScore.textContent = data.score.toString();
+      scoreBar.style.width = `${data.score}%`;
+
+      // Color based on score
+      if (data.score >= 80) {
+        scoreBar.classList.add('bg-green-500');
+        scoreBar.classList.remove('bg-yellow-500', 'bg-red-500');
+        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-900 text-green-300';
+        statusText.textContent = '✅ Safe';
+      } else if (data.score >= 50) {
+        scoreBar.classList.add('bg-yellow-500');
+        scoreBar.classList.remove('bg-green-500', 'bg-red-500');
+        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-900 text-yellow-300';
+        statusText.textContent = '⚠️ Warning';
+      } else {
+        scoreBar.classList.add('bg-red-500');
+        scoreBar.classList.remove('bg-green-500', 'bg-yellow-500');
+        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-900 text-red-300';
+        statusText.textContent = '❌ Unsafe';
+      }
+
+      // Issues
+      const issuesList = document.getElementById('issues-list') as HTMLDivElement;
+      const issues = document.getElementById('issues') as HTMLUListElement;
+
+      if (data.issues && data.issues.length > 0) {
+        issuesList.classList.remove('hidden');
+        issues.innerHTML = data.issues.map((issue: string) => `<li>• ${issue}</li>`).join('');
+      } else {
+        issuesList.classList.add('hidden');
+      }
+
+      // Metrics
+      document.getElementById('engagement-score')!.textContent = `${data.metrics.engagementScore}/100`;
+      document.getElementById('readability-score')!.textContent = `${data.metrics.readabilityScore}/100`;
+      document.getElementById('hashtag-relevance')!.textContent = `${data.metrics.hashtagRelevance}%`;
+      document.getElementById('processing-time')!.textContent = `${data.processingTime}ms`;
+
+      // Suggestions
+      const suggestionsContainer = document.getElementById('suggestions-container') as HTMLDivElement;
+      const captionSuggestion = document.getElementById('caption-suggestion') as HTMLDivElement;
+      const hashtagSuggestion = document.getElementById('hashtag-suggestion') as HTMLDivElement;
+
+      if (data.suggestions && (data.suggestions.caption || data.suggestions.hashtags)) {
+        suggestionsContainer.classList.remove('hidden');
+
+        if (data.suggestions.caption) {
+          captionSuggestion.classList.remove('hidden');
+          document.getElementById('suggested-caption')!.textContent = data.suggestions.caption;
+        } else {
+          captionSuggestion.classList.add('hidden');
+        }
+
+        if (data.suggestions.hashtags) {
+          hashtagSuggestion.classList.remove('hidden');
+          document.getElementById('suggested-hashtags')!.textContent = data.suggestions.hashtags.join(' ');
+        } else {
+          hashtagSuggestion.classList.add('hidden');
+        }
+      } else {
+        suggestionsContainer.classList.add('hidden');
+      }
+    }
+  </script>
+</Layout>

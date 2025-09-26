@@ -1,0 +1,29 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "SafeCaption - AI-powered Instagram content validation" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-dark-bg text-dark-text">
+    <main class="min-h-screen">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  @import '../styles/global.css';
+</style>

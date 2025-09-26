@@ -1,0 +1,292 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="SafeCaption - AI-powered Instagram Content Validation">
+  <Header />
+
+  <div class="container mx-auto px-4 py-16">
+    <!-- Hero Section -->
+    <section class="text-center max-w-4xl mx-auto mb-16">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+        SafeCaption
+      </h1>
+      <p class="text-xl text-dark-textMuted mb-8 leading-relaxed">
+        AI-powered Instagram content validation service. Ensure your posts comply with community guidelines before publishing.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/demo" class="btn-primary text-lg px-8 py-3 inline-block">Try Live Demo</a>
+        <a href="/api" class="btn-secondary text-lg px-8 py-3 inline-block">API Docs</a>
+      </div>
+    </section>
+
+    <!-- Problem Statement Section -->
+    <section class="mb-20 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">🚨 Instagram content violations can destroy your reach</h2>
+        <p class="text-xl text-gray-400 mb-8">
+          One inappropriate caption can shadow-ban your account for weeks.
+          Spam-like content reduces engagement by up to 70%.
+        </p>
+        <div class="grid md:grid-cols-2 gap-8 mt-12">
+          <div class="bg-red-950/20 border border-red-800/50 rounded-lg p-6">
+            <div class="text-2xl mb-3">❌</div>
+            <h3 class="font-semibold text-red-300 mb-2">Without SafeCaption</h3>
+            <ul class="text-sm text-gray-400 space-y-1 text-left">
+              <li>• Manual content review</li>
+              <li>• Risk of policy violations</li>
+              <li>• Reduced reach and engagement</li>
+              <li>• Account penalties</li>
+            </ul>
+          </div>
+          <div class="bg-green-950/20 border border-green-800/50 rounded-lg p-6">
+            <div class="text-2xl mb-3">✅</div>
+            <h3 class="font-semibold text-green-300 mb-2">With SafeCaption</h3>
+            <ul class="text-sm text-gray-400 space-y-1 text-left">
+              <li>• Instant AI validation</li>
+              <li>• Policy compliance guaranteed</li>
+              <li>• Optimized for engagement</li>
+              <li>• Protected account health</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="mb-20">
+      <h2 class="text-3xl font-bold text-center mb-12">🛡️ Multi-layer content protection</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card text-center hover:border-purple-500/50 transition-colors">
+          <div class="w-16 h-16 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Hate Speech Detection</h3>
+          <p class="text-gray-400 mb-4">AI-powered detection of offensive content and policy violations before they hurt your account.</p>
+          <div class="text-sm text-purple-400 font-mono">checkHateSpeech: true</div>
+        </div>
+
+        <div class="card text-center hover:border-blue-500/50 transition-colors">
+          <div class="w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Spam Protection</h3>
+          <p class="text-gray-400 mb-4">Identifies spam patterns, excessive promotion, and engagement-killing content automatically.</p>
+          <div class="text-sm text-blue-400 font-mono">checkSpam: true</div>
+        </div>
+
+        <div class="card text-center hover:border-green-500/50 transition-colors">
+          <div class="w-16 h-16 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Engagement Optimization</h3>
+          <p class="text-gray-400 mb-4">Predicts performance and suggests improvements to maximize reach and engagement.</p>
+          <div class="text-sm text-green-400 font-mono">predictEngagement: true</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section class="mb-20">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">One API call is all you need</h2>
+        <p class="text-gray-400 text-lg">Validate Instagram captions in milliseconds with our powerful AI</p>
+      </div>
+
+      <!-- API Example with Tabs -->
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
+          <!-- Tabs -->
+          <div class="flex border-b border-gray-800">
+            <button class="tab-button active px-6 py-3 text-sm font-medium bg-gray-800 text-white" data-tab="curl">
+              cURL
+            </button>
+            <button class="tab-button px-6 py-3 text-sm font-medium text-gray-400 hover:text-white" data-tab="node">
+              Node.js
+            </button>
+            <button class="tab-button px-6 py-3 text-sm font-medium text-gray-400 hover:text-white" data-tab="python">
+              Python
+            </button>
+          </div>
+
+          <!-- Code Examples -->
+          <div class="p-6">
+            <div id="curl-example" class="code-example">
+              <pre class="bg-black p-4 rounded-lg overflow-x-auto"><code class="text-sm text-green-400">{`curl -X POST https://api.safecaption.com/v1/validate \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "caption": "Check out my new collection! 🔥",
+    "options": { "checkSpam": true }
+  }'`}</code></pre>
+            </div>
+
+            <div id="node-example" class="code-example hidden">
+              <pre class="bg-black p-4 rounded-lg overflow-x-auto"><code class="text-sm text-blue-400">{`const response = await fetch('/api/v1/validate', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    caption: "Check out my new collection! 🔥",
+    options: { checkSpam: true }
+  })
+});
+
+const result = await response.json();`}</code></pre>
+            </div>
+
+            <div id="python-example" class="code-example hidden">
+              <pre class="bg-black p-4 rounded-lg overflow-x-auto"><code class="text-sm text-yellow-400">{`import requests
+
+response = requests.post(
+    'https://api.safecaption.com/v1/validate',
+    headers={
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+    },
+    json={
+        'caption': 'Check out my new collection! 🔥',
+        'options': {'checkSpam': True}
+    }
+)
+
+result = response.json()`}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Response Box -->
+        <div class="mt-6 bg-gray-900 rounded-xl border border-gray-800 p-6">
+          <h3 class="text-lg font-semibold mb-4 text-green-400">Response</h3>
+          <pre class="bg-black p-4 rounded-lg overflow-x-auto"><code class="text-sm text-gray-300">{`{
+  "safe": true,
+  "score": 95,
+  "issues": [],
+  "suggestions": {
+    "hashtags": ["#fashion", "#style", "#trendy"]
+  },
+  "metrics": {
+    "engagementScore": 82,
+    "readabilityScore": 90,
+    "hashtagRelevance": 85
+  },
+  "processingTime": 5
+}`}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="mb-20">
+      <h2 class="text-3xl font-bold text-center mb-12">📈 Trusted by creators worldwide</h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="text-center bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+          <div class="text-4xl font-bold text-purple-400 mb-2">5ms</div>
+          <div class="text-gray-400 text-sm uppercase tracking-wide">Avg Response Time</div>
+          <div class="text-xs text-gray-500 mt-1">Lightning fast validation</div>
+        </div>
+        <div class="text-center bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+          <div class="text-4xl font-bold text-pink-400 mb-2">99.9%</div>
+          <div class="text-gray-400 text-sm uppercase tracking-wide">Uptime</div>
+          <div class="text-xs text-gray-500 mt-1">Enterprise-grade reliability</div>
+        </div>
+        <div class="text-center bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+          <div class="text-4xl font-bold text-blue-400 mb-2">1M+</div>
+          <div class="text-gray-400 text-sm uppercase tracking-wide">Captions Validated</div>
+          <div class="text-xs text-gray-500 mt-1">Preventing violations daily</div>
+        </div>
+        <div class="text-center bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+          <div class="text-4xl font-bold text-green-400 mb-2">10K+</div>
+          <div class="text-gray-400 text-sm uppercase tracking-wide">Active Users</div>
+          <div class="text-xs text-gray-500 mt-1">Growing creator community</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section class="mb-20 text-center">
+      <h2 class="text-3xl font-bold mb-6">🔗 Integrate in minutes</h2>
+      <p class="text-xl text-gray-400 mb-12">Add SafeCaption to your workflow with our simple REST API</p>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+          <div class="text-2xl mb-3">🔑</div>
+          <h3 class="font-semibold mb-2">1. Get API Key</h3>
+          <p class="text-sm text-gray-400">Sign up and receive your API key instantly</p>
+        </div>
+        <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+          <div class="text-2xl mb-3">📝</div>
+          <h3 class="font-semibold mb-2">2. Make Request</h3>
+          <p class="text-sm text-gray-400">Send your caption via simple HTTP POST</p>
+        </div>
+        <div class="bg-gray-900/50 rounded-lg p-6 border border-gray-800">
+          <div class="text-2xl mb-3">✅</div>
+          <h3 class="font-semibent mb-2">3. Get Results</h3>
+          <p class="text-sm text-gray-400">Receive validation results in milliseconds</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="text-center">
+      <div class="bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-blue-900/20 rounded-2xl p-12 border border-gray-800">
+        <h2 class="text-4xl font-bold mb-4">Protect your Instagram today</h2>
+        <p class="text-xl text-gray-400 mb-8">Join thousands of creators using SafeCaption to avoid violations and maximize engagement.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/demo" class="btn-primary text-lg px-8 py-4 inline-block">Try Free Demo</a>
+          <a href="/pricing" class="btn-secondary text-lg px-8 py-4 inline-block">View Pricing</a>
+        </div>
+        <div class="mt-6 text-sm text-gray-500">
+          No credit card required • 1,000 free validations/month
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Tab functionality for code examples
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const tabName = button.getAttribute('data-tab');
+
+        // Remove active class from all tabs and examples
+        document.querySelectorAll('.tab-button').forEach(b => {
+          b.classList.remove('active', 'bg-gray-800', 'text-white');
+          b.classList.add('text-gray-400');
+        });
+        document.querySelectorAll('.code-example').forEach(example => {
+          example.classList.add('hidden');
+        });
+
+        // Add active class to clicked tab
+        button.classList.add('active', 'bg-gray-800', 'text-white');
+        button.classList.remove('text-gray-400');
+
+        // Show corresponding example
+        document.getElementById(tabName + '-example').classList.remove('hidden');
+      });
+    });
+
+    // Hover effects for tab buttons
+    document.querySelectorAll('.tab-button:not(.active)').forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        button.classList.add('text-white');
+      });
+      button.addEventListener('mouseleave', () => {
+        if (!button.classList.contains('active')) {
+          button.classList.remove('text-white');
+          button.classList.add('text-gray-400');
+        }
+      });
+    });
+  </script>
+</Layout>
