@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy - SafeCaption">
+  <div class="container mx-auto px-4 py-12 max-w-4xl">
+    <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
+
+    <div class="prose prose-invert max-w-none space-y-6 text-gray-300">
+      <p class="text-sm text-gray-400">Last Updated: January 26, 2025</p>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">1. Information We Collect</h2>
+        <div class="space-y-3">
+          <h3 class="text-xl text-white">Account Information</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Email address</li>
+            <li>Name (optional)</li>
+            <li>Password (encrypted)</li>
+            <li>Payment information (processed by Razorpay)</li>
+          </ul>
+
+          <h3 class="text-xl text-white">API Usage Data</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>API requests and responses</li>
+            <li>Timestamps of API calls</li>
+            <li>IP addresses for security</li>
+            <li>Usage metrics and analytics</li>
+          </ul>
+
+          <h3 class="text-xl text-white">Technical Information</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Browser type and version</li>
+            <li>Device information</li>
+            <li>Log data</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">2. How We Use Your Information</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>To provide and maintain our API service</li>
+          <li>To process payments and subscriptions</li>
+          <li>To send important service notifications</li>
+          <li>To detect and prevent fraud or abuse</li>
+          <li>To improve our services</li>
+          <li>To comply with legal obligations</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">3. Data Security</h2>
+        <p>We implement industry-standard security measures to protect your data:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>SSL/TLS encryption for all data transmission</li>
+          <li>Encrypted password storage using bcrypt</li>
+          <li>Secure API key generation and storage</li>
+          <li>Regular security audits</li>
+          <li>Limited access to personal information</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">4. Third-Party Services</h2>
+        <p>We use trusted third-party services:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Supabase:</strong> For authentication and database</li>
+          <li><strong>Razorpay:</strong> For payment processing (PCI compliant)</li>
+          <li><strong>Vercel:</strong> For hosting and analytics</li>
+        </ul>
+        <p class="mt-3">These services have their own privacy policies and we recommend reviewing them.</p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">5. Data Retention</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Account data: Retained while account is active</li>
+          <li>API logs: Retained for 90 days</li>
+          <li>Payment records: Retained as required by law (typically 7 years)</li>
+          <li>You can request deletion at any time</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">6. Your Rights</h2>
+        <p>Under GDPR and Indian data protection laws, you have the right to:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Access your personal data</li>
+          <li>Correct inaccurate data</li>
+          <li>Request deletion of your data</li>
+          <li>Export your data</li>
+          <li>Opt-out of marketing communications</li>
+          <li>Lodge a complaint with authorities</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">7. Cookies</h2>
+        <p>We use essential cookies for:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Authentication and session management</li>
+          <li>Security purposes</li>
+          <li>Remembering preferences</li>
+        </ul>
+        <p class="mt-3">We do not use tracking or advertising cookies.</p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">8. Children's Privacy</h2>
+        <p>Our service is not intended for users under 18 years of age. We do not knowingly collect data from children.</p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">9. International Data Transfers</h2>
+        <p>Your data may be processed in:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>India (primary)</li>
+          <li>United States (Vercel hosting)</li>
+          <li>Singapore (Supabase region)</li>
+        </ul>
+        <p class="mt-3">We ensure appropriate safeguards are in place for international transfers.</p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">10. Contact Information</h2>
+        <p>For privacy concerns or data requests:</p>
+        <div class="bg-gray-800 p-4 rounded-lg mt-3">
+          <p>Email: privacy@safecaption.com</p>
+          <p>Response time: Within 48 hours</p>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">11. Changes to This Policy</h2>
+        <p>We may update this policy periodically. We will notify you of significant changes via email or through our service.</p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-white mt-8">12. Compliance</h2>
+        <p>This privacy policy complies with:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Information Technology Act, 2000 (India)</li>
+          <li>Personal Data Protection Bill (India)</li>
+          <li>GDPR (for EU users)</li>
+          <li>CCPA (for California users)</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-gray-700">
+      <p class="text-sm text-gray-400 text-center">
+        © 2025 SafeCaption. All rights reserved.
+      </p>
+    </div>
+  </div>
+</Layout>
