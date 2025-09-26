@@ -204,10 +204,37 @@ import Layout from '../layouts/Layout.astro';
           name: 'SafeCaption',
           description: order.description,
           order_id: order.orderId,
-          handler: function(response) {
+          handler: async function(response) {
             // Payment successful
             console.log('Payment successful:', response);
-            document.getElementById('success-modal').classList.remove('hidden');
+
+            try {
+              // Update user subscription status
+              const updateResponse = await fetch('/api/payment-success', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${session.access_token}`
+                },
+                body: JSON.stringify({
+                  paymentId: response.razorpay_payment_id,
+                  orderId: response.razorpay_order_id,
+                  signature: response.razorpay_signature,
+                  plan: plan,
+                  billing: billing
+                })
+              });
+
+              if (updateResponse.ok) {
+                document.getElementById('success-modal').classList.remove('hidden');
+              } else {
+                console.error('Failed to update subscription');
+                alert('Payment successful but subscription update failed. Please contact support.');
+              }
+            } catch (error) {
+              console.error('Error updating subscription:', error);
+              alert('Payment successful but there was an issue. Please contact support.');
+            }
           },
           prefill: {
             name: session.user.user_metadata?.full_name || '',

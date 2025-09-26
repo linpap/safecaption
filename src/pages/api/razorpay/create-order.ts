@@ -75,8 +75,6 @@ export const POST: APIRoute = async ({ request }) => {
     const order = await createOrder(amount, user.id);
 
     // Store order details in database for later verification
-    // TODO: Add this back after running payment_orders.sql in Supabase
-    /*
     await supabase
       .from('payment_orders')
       .insert({
@@ -87,7 +85,6 @@ export const POST: APIRoute = async ({ request }) => {
         amount: amount,
         status: 'created',
       });
-    */
 
     return new Response(JSON.stringify({
       orderId: order.id,
